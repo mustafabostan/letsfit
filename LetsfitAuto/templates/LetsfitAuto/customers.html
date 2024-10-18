@@ -1,0 +1,49 @@
+{% extends "base.html" %}
+{% block title %}Üyeler{% endblock %}
+{% block content %}
+
+<div class="container mt-2">
+    <div class="row">        
+        <div class="col-3"><h1>Üyeler</h1>
+            {% comment %} {% include 'LetsfitAuto/partials/_addcustomer.html' %} {% endcomment %}
+            <form method="POST">
+                <fieldset>                    
+                    {% csrf_token %}
+                    <label for="name">İsim</label>
+                    {{ form.name }}
+                    <label for="name">Soyisim</label>
+                    {{ form.surname }}
+                    <label for="name">Telefon Numarası</label>
+                    {{ form.mobile_number }}
+                    <input type="submit" value="Üye Kayıt" class="btn btn-primary mt-2">
+                </fieldset>
+            </form>
+        </div>
+        <div class="col">
+            <table class="table">
+                <thead>
+                    <tr>
+                        <th scope="col"></th>
+                        <th scope="col">İsim</th>
+                        <th scope="col">Soyisim</th>
+                        <th scope="col">Telefon Numarası</th>
+                        <th scope="col">Durum</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for customer in customers %}
+                        <tr>
+                            <th scope="row">{{ customer.id }}</th>
+                            <td>{{ customer.name }}</td>
+                            <td>{{ customer.surname }}</td>
+                            <td>{{ customer.mobile_number }}</td>
+                            <td>{% if customer.status == False %} Pasif {% else %} Aktif {% endif %}</td>
+                        </tr>
+                    {% endfor %}
+                </tbody>              
+            </table>            
+        </div>
+    </div>
+</div>
+
+{% endblock %}

@@ -1,0 +1,16 @@
+<div id="scheduler"></div>
+
+<script id="template" type="text/x-kendo-template">
+  #var element = target.is(".k-task") ? target : target.parent();#
+  #var uid = element.attr("data-uid");#
+  #var scheduler = target.closest("[data-role=scheduler]").data("kendoScheduler");#
+  #var model = scheduler.occurrenceByUid(uid);# 
+
+  #if(model) {#
+      <strong>event start:</strong> #=kendo.format('{0:d}',model.start)#<br />
+      <strong>event end:</strong> #=kendo.format('{0:d}',model.end)#<br />
+      <strong>event description:</strong> #=model.description#<br />
+  #} else {#
+      <strong>No event data is available</strong>
+  #}#
+</script>
